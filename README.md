@@ -52,7 +52,7 @@ Exemple with [SparkMD5](https://github.com/satazor/js-spark-md5).
 const fs = require('fs');
 const squareicon = require('squareicon');
 
-squareicon({id: 'mistic'100}, (err, buffer) => {
+squareicon({id: 'mistic100'}, (err, buffer) => {
     fs.writeFileSync('mistic100.png', buffer);
 });
 ```
@@ -73,7 +73,7 @@ $ squareicon --id mistic100 mistic100.png
 | colors | 2 | number of colors, can only be 1 or 2 |
 | pixels | 8 | number of pixels, between 2 and 16 |
 | size | 128 | desired size<sup>1</sup>, between `pixels` and 2048 |
-| padding | 0 | desired padding, between 0 and `size / 2` |
+| padding | 0 | desired padding, between 0 and `size / 3` |
 | symmetry | none | type of symmetry, one of `none` `vertical` `horizontal` `central` |
 | scheme | standard | colors scheme<sup>2</sup>, one of `raw` `standard` `light` `bright` `dark` |
 | background | transparent | background color as a CSS string |

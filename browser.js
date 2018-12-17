@@ -34,7 +34,7 @@
     var MAX_COLORS = 2;
     var MAX_PIXELS = 16;
     var MAX_SIZE = 2048;
-    var MAX_PADDING_RATIO = 0.5;
+    var MAX_PADDING_RATIO = 3;
     var DEFAULT = {
       id: null,
       hasher: md5,
@@ -132,8 +132,8 @@
       options.colors = minMax(options.colors, 1, MAX_COLORS);
       options.pixels = minMax(options.pixels, 2, MAX_PIXELS);
       options.size = minMax(options.size, options.pixels, MAX_SIZE);
-      options.size = Math.round(options.size / options.pixels) * options.pixels;
-      options.padding = minMax(options.padding, 0, MAX_PADDING_RATIO * options.size);
+      options.padding = minMax(options.padding, 0, Math.floor(options.size / MAX_PADDING_RATIO));
+      options.size = Math.round((options.size - options.padding * 2) / options.pixels) * options.pixels;
       var minIdLength = getMinIdLength(options.pixels, options.colors);
 
       if (!options.id) {
