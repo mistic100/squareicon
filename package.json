@@ -1,6 +1,6 @@
 {
   "name": "squareicon",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "identicons with squares",
   "license": "MIT",
   "author": {
@@ -11,6 +11,12 @@
   "main": "index.js",
   "browser": "browser.js",
   "bin": "./cli.js",
+  "keywords": [
+    "identicons",
+    "abstract",
+    "canvas",
+    "avatar"
+  ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "compile": "rollup --config rollup.config.js",
