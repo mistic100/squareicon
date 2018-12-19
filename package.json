@@ -1,6 +1,6 @@
 {
   "name": "squareicon",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "identicons with squares",
   "license": "MIT",
   "author": {
@@ -17,6 +17,14 @@
     "canvas",
     "avatar"
   ],
+  "homepage": "https://mistic100.github.io/squareicon",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/mistic100/squareicon.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mistic100/squareicon/issues"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "compile": "rollup --config rollup.config.js",
