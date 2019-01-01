@@ -2,6 +2,8 @@
 
 [![npm version](https://img.shields.io/npm/v/squareicon.svg?style=flat-square)](https://www.npmjs.com/package/squareicon)
 [![jsDelivr CDN](https://data.jsdelivr.com/v1/package/npm/squareicon/badge)](https://www.jsdelivr.com/package/npm/squareicon)
+[![Build Status](https://img.shields.io/travis/mistic100/squareicon/master.svg?style=flat-square)](https://travis-ci.org/mistic100/squareicon)
+[![Dependencies Status](https://david-dm.org/mistic100/squareicon/status.svg?style=flat-square)](https://david-dm.org/mistic100/squareicon)
 
 JavaScript library for generating abstract images from unique identifiers.
 
