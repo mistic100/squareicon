@@ -12,6 +12,12 @@
   "browser": "browser.js",
   "types": "types.d.ts",
   "bin": "./cli.js",
+  "files": [
+    "browser.js",
+    "browser.js.map",
+    "cli.js",
+    "types.d.ts"
+  ],
   "keywords": [
     "identicons",
     "abstract",

@@ -1,7 +1,0 @@
-.*
-*.iml
-.babelrc.js
-yarn.lock
-yarn-error.log
-canvas.js
-rollup.config.js
