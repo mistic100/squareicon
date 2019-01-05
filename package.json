@@ -10,6 +10,7 @@
   },
   "main": "index.js",
   "browser": "browser.js",
+  "types": "types.d.ts",
   "bin": "./cli.js",
   "keywords": [
     "identicons",
@@ -28,7 +29,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "compile": "rollup --config rollup.config.js",
-    "serve": "live-server --watch=browser.js,demo.html --entry-file=demo.html",
+    "serve": "live-server --watch=browser.js,index.html --entry-file=index.html",
     "start": "npm-run-all --parallel watch serve",
     "watch": "nodemon --watch index.js --exec \"npm run compile\""
   },
