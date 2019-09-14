@@ -51,7 +51,7 @@
     "live-server": "^1.2.1",
     "nodemon": "^1.18.9",
     "npm-run-all": "^4.1.5",
-    "rollup": "^1.19.1",
+    "rollup": "^1.21.3",
     "rollup-plugin-babel": "^4.0.3",
     "rollup-plugin-commonjs": "^10.0.0",
     "rollup-plugin-replace": "^2.1.0"
