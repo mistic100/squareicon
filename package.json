@@ -46,7 +46,7 @@
     "yargs": "^14.0.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.2.0",
+    "@babel/core": "^7.6.4",
     "@babel/preset-env": "^7.2.0",
     "live-server": "^1.2.1",
     "nodemon": "^1.18.9",
