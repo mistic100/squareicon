@@ -1,13 +1,13 @@
 /*!
- * squareicon (v1.0.0)
- * @copyright 2018 Damien "Mistic" Sorel <contact@git.strangeplanet.fr>
+ * squareicon (v1.0.3)
+ * @copyright 2018-2019 Damien "Mistic" Sorel <contact@git.strangeplanet.fr>
  * @licence MIT
  */
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('md5'), require('randomcolor')) :
     typeof define === 'function' && define.amd ? define(['md5', 'randomcolor'], factory) :
-    (global.squareicon = factory(global.md5,global.randomColor));
-}(this, (function (md5,randomcolor) { 'use strict';
+    (global = global || self, global.squareicon = factory(global.md5, global.randomColor));
+}(this, (function (md5, randomcolor) { 'use strict';
 
     md5 = md5 && md5.hasOwnProperty('default') ? md5['default'] : md5;
     randomcolor = randomcolor && randomcolor.hasOwnProperty('default') ? randomcolor['default'] : randomcolor;
@@ -168,8 +168,8 @@
       var ps = options.size / options.pixels;
       var pad = options.padding;
       var cs = options.size + 2 * options.padding;
-      var canvas$$1 = createCanvas$1(cs, cs);
-      var ctx = canvas$$1.getContext('2d');
+      var canvas = createCanvas$1(cs, cs);
+      var ctx = canvas.getContext('2d');
       ctx.fillStyle = options.background;
       ctx.beginPath();
       ctx.rect(0, 0, cs, cs);
@@ -191,7 +191,7 @@
         }
       }
 
-      return canvas$$1;
+      return canvas;
     }
     /**
      * Returns the buffer or dataURL from a canvas
@@ -201,18 +201,18 @@
      */
 
 
-    function finalize(canvas$$1, callback) {
+    function finalize(canvas, callback) {
       if (typeof callback === 'function') {
-        if (canvas$$1.toBuffer) {
-          canvas$$1.toBuffer(callback);
+        if (canvas.toBuffer) {
+          canvas.toBuffer(callback);
         } else {
-          callback(null, canvas$$1.toDataURL());
+          callback(null, canvas.toDataURL());
         }
       } else {
-        if (canvas$$1.toBuffer) {
-          return canvas$$1.toBuffer();
+        if (canvas.toBuffer) {
+          return canvas.toBuffer();
         } else {
-          return canvas$$1.toDataURL();
+          return canvas.toDataURL();
         }
       }
     }
@@ -329,8 +329,8 @@
         horizontalSymmetry(squareColors, options.pixels);
       }
 
-      var canvas$$1 = render(colors, squares, squareColors, options);
-      return finalize(canvas$$1, callback);
+      var canvas = render(colors, squares, squareColors, options);
+      return finalize(canvas, callback);
     }
 
     var squareicon_1 = squareicon;

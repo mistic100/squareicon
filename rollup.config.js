@@ -17,7 +17,7 @@ export default {
         },
         banner   : `/*!
  * ${pkg.name} (v${pkg.version})
- * @copyright ${new Date().getFullYear()} ${pkg.author.name} <${pkg.author.email}>
+ * @copyright 2018-${new Date().getFullYear()} ${pkg.author.name} <${pkg.author.email}>
  * @licence ${pkg.license}
  */`,
     },

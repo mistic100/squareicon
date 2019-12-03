@@ -1,6 +1,6 @@
 {
   "name": "squareicon",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "identicons with squares",
   "license": "MIT",
   "author": {
@@ -16,6 +16,7 @@
     "browser.js",
     "browser.js.map",
     "cli.js",
+    "index.js",
     "types.d.ts"
   ],
   "keywords": [
@@ -33,7 +34,6 @@
     "url": "https://github.com/mistic100/squareicon/issues"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "compile": "rollup --config rollup.config.js",
     "serve": "live-server --watch=browser.js,index.html --entry-file=index.html",
     "start": "npm-run-all --parallel watch serve",
