@@ -42,7 +42,7 @@
   "dependencies": {
     "canvas": "^2.1.0",
     "md5": "^2.2.1",
-    "randomcolor": "^0.5.3",
+    "randomcolor": "^0.6.2",
     "yargs": "^15.0.1"
   },
   "devDependencies": {
