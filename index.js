@@ -1,5 +1,5 @@
 const { createCanvas } = require('canvas');
-const md5 = require('md5');
+const { createHash } = require('crypto');
 const randomColor = require('randomcolor');
 
 const MAX_COLORS = 2;
@@ -9,7 +9,7 @@ const MAX_PADDING_RATIO = 3;
 
 const DEFAULT = {
     id        : null,
-    hasher    : md5,
+    hasher    : defaultHasher,
     colors    : 2,
     pixels    : 8,
     size      : 128,
@@ -20,14 +20,35 @@ const DEFAULT = {
 };
 
 /**
+ * Default hash implementation using node:crypto or Web Crypto API
+ * @param {string} val
+ * @returns {Promise<string>}
+ */
+async function defaultHasher(val) {
+    if (createHash) {
+        return createHash('sha1').update(val).digest('hex');
+    }
+    else if (window.crypto?.subtle) {
+        const data = new TextEncoder().encode(val);
+        const result = await crypto.subtle.digest('sha-1', data);
+        return Array.from(new Uint8Array(result))
+            .map((b) => b.toString(16).padStart(2, '0'))
+            .join('');
+    }
+    else {
+        throw Error('No hasher available, please configure the "hasher" option.');
+    }
+}
+
+/**
  * Generates a random HEX string of specific length
  * @param {number} length
  * @returns {string}
  */
 function unsecureRandom(length) {
     let out = '';
-    while (out.length < length) out += Math.random().toString(16).substr(2);
-    return out.substr(0, length);
+    while (out.length < length) out += Math.random().toString(16).substring(2);
+    return out.substring(0, length);
 }
 
 /**
@@ -35,13 +56,15 @@ function unsecureRandom(length) {
  * @param {function} hasher
  * @param {string} str
  * @param {number} length
- * @returns {string}
+ * @returns {Promise<string>}
  */
-function loopHash(hasher, str, length) {
+async function loopHash(hasher, str, length) {
     let out = '';
     let i = 0;
-    while (out.length < length) out += hasher(str + (++i > 1 ? i : ''));
-    return out.substr(0, length);
+    while (out.length < length) {
+        out += await hasher(str + (++i > 1 ? i : ''));
+    }
+    return out.substring(0, length);
 }
 
 /**
@@ -78,9 +101,9 @@ function getMinIdLength(pixels, colors) {
 /**
  * Cleanups options
  * @param {object|string} options
- * @returns {object}
+ * @returns {Promise<object>}
  */
-function getOptions(options) {
+async function getOptions(options) {
     if (typeof options === 'string') {
         options = { id: options };
     }
@@ -93,21 +116,20 @@ function getOptions(options) {
     options.padding = minMax(options.padding, 0, Math.floor(options.size / MAX_PADDING_RATIO));
     options.size = Math.round((options.size - options.padding * 2) / options.pixels) * options.pixels;
 
-    const minIdLength = getMinIdLength(options.pixels, options.colors);
-
-    if (!options.id) {
-        options.id = unsecureRandom(minIdLength);
-    }
-    else {
-        options.id = loopHash(options.hasher, options.id, minIdLength);
-    }
-
     if (['none', 'horizontal', 'vertical', 'central'].indexOf(options.symmetry) === -1) {
         options.symmetry = 'none';
     }
 
     if (['raw', 'standard', 'bright', 'light', 'dark'].indexOf(options.scheme) === -1) {
         options.scheme = 'standard';
+    }
+
+    const minIdLength = getMinIdLength(options.pixels, options.colors);
+    if (!options.id) {
+        options.id = unsecureRandom(minIdLength);
+    }
+    else {
+        options.id = await loopHash(options.hasher, options.id, minIdLength);
     }
 
     return options;
@@ -186,7 +208,7 @@ function finalize(canvas, callback) {
 function readbits(str) {
     let bits = [];
     for (let i = 0; i < str.length; i++) {
-        let tmp = hexdec(str.substr(i, 1));
+        let tmp = hexdec(str.substring(i, i + 1));
         Array.prototype.push.apply(bits, [(tmp & 8) !== 0, (tmp & 4) !== 0, (tmp & 2) !== 0, (tmp & 1) !== 0]);
     }
     return bits;
@@ -223,7 +245,7 @@ function horizontalSymmetry(squares, pixels) {
  * @returns {string}
  */
 function readcolor(str, scheme) {
-    if (scheme === 'raw') {
+    if (scheme === 'raw' || !randomColor) {
         return '#' + str;
     }
     else {
@@ -243,9 +265,7 @@ function readcolor(str, scheme) {
  */
 function filledarray(value, length) {
     let out = [];
-    while (out.length < length) {
-        out.push(value);
-    }
+    while (out.length < length) out.push(value);
     return out;
 }
 
@@ -253,10 +273,10 @@ function filledarray(value, length) {
  * Generates a squareison
  * @param {object} options
  * @param {Function<String|Buffer>} [callback]
- * @returns {String|Buffer|void}
+ * @returns {Promise<String|Buffer|void>}
  */
-function squareicon(options, callback) {
-    options = getOptions(options);
+async function squareicon(options, callback) {
+    options = await getOptions(options);
 
     const colorBytes = 6;
     const pixelsBytes = options.pixels * options.pixels / 4;

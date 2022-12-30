@@ -2,7 +2,7 @@ declare namespace squareicon {
 
     type Options = {
         id?: string;
-        hasher: (val: string) => string;
+        hasher: (val: string) => string | Promise<string>;
         colors: number;
         pixels: number;
         size: number;
@@ -15,7 +15,7 @@ declare namespace squareicon {
     type Callback = (err: Error, buffer: Buffer | string) => void;
 
     interface Squareicon {
-        (options: Options, callback?: Callback): Buffer | string | void;
+        (options: Options, callback?: Callback): Promise<Buffer | string | void>;
 
         DEFAULT: Options;
     }

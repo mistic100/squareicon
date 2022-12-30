@@ -35,23 +35,21 @@
   },
   "scripts": {
     "compile": "rollup --config rollup.config.mjs",
-    "serve": "live-server --watch=browser.js,index.html --entry-file=index.html",
+    "serve": "alive-server --watch=browser.js,index.html --entry-file=index.html",
     "start": "npm-run-all --parallel watch serve",
     "watch": "nodemon --watch index.js --exec \"npm run compile\""
   },
   "dependencies": {
     "canvas": "^2.11.0",
-    "md5": "^2.3.0",
     "randomcolor": "^0.6.2",
     "yargs": "^17.6.2"
   },
   "devDependencies": {
     "@babel/core": "^7.20.7",
     "@babel/preset-env": "^7.20.2",
-    "@rollup/plugin-babel": "^6.0.3",
     "@rollup/plugin-commonjs": "^24.0.0",
     "@rollup/plugin-replace": "^5.0.2",
-    "live-server": "^1.2.2",
+    "alive-server": "^1.2.9",
     "nodemon": "^2.0.20",
     "npm-run-all": "^4.1.5",
     "rollup": "^3.9.0"
