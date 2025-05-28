@@ -42,7 +42,7 @@
   "dependencies": {
     "canvas": "^3.0.0",
     "randomcolor": "^0.6.2",
-    "yargs": "^17.6.2"
+    "yargs": "^18.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.7",
